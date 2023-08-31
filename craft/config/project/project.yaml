@@ -1,0 +1,22 @@
+dateModified: 1693495352
+email:
+  fromEmail: digitalteam@nucreative.co.uk
+  fromName: Craftible
+  transportType: craft\mail\transportadapters\Sendmail
+meta:
+  __names__:
+    9e68a7a1-10dc-40c2-ad7d-8aa5aa2742e1: Craftible # Craftible
+    75f94414-e01c-4952-b21d-c125a883fb9c: Common # Common
+    bedeaa29-1417-4757-9662-3e144b4048b6: Craftible # Craftible
+system:
+  edition: solo
+  live: true
+  name: Craftible
+  schemaVersion: 4.5.3.0
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  requireEmailVerification: true
