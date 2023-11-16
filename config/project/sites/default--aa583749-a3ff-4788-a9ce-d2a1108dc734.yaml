@@ -1,8 +1,8 @@
 baseUrl: $PRIMARY_SITE_URL
 handle: default
 hasUrls: true
-language: en-US
+language: en-GB
 name: Craftible
 primary: true
-siteGroup: bedeaa29-1417-4757-9662-3e144b4048b6 # Craftible
+siteGroup: 50e6cc22-2ab8-4ee4-96c0-53a13b06ee2f # Craftible
 sortOrder: 1
