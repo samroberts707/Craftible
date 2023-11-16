@@ -1,0 +1,42 @@
+---
+- name: Provision server
+  hosts: all
+  remote_user: root
+
+  tasks:
+  - name: Install APT packages
+    ansible.builtin.apt:
+      name: "{{ item }}"
+      state: present
+      update_cache: true
+    with_items:
+     - apache2
+     - mysql-server
+     - python3-pip
+  
+  - name: Enable UFW Firewall
+    ufw:
+      rule: allow
+      name: "{{ item }}"
+      direction: in
+      state: enabled
+    with_items:
+      - OpenSSH
+      - Apache Full
+      # TODO - Change this to "Apache Secure" once playbook is done
+
+  - name: Make sure pymysql is present
+    pip:
+      name: pymysql
+      state: present
+
+  # - name: Create MySQL root user password file
+  #   ansible.builtin.file:
+  #     path: "{{ mysql_password_file }}"
+  #     state: touch
+  
+  # - name: Fill MySQL root user password file
+  #   ansible.builtin.copy:
+  #     content: "Hello World"
+  #     dest: "{{ mysql_password_file }}"
+    
