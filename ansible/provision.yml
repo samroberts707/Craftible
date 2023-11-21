@@ -4,6 +4,11 @@
   remote_user: root
 
   tasks:
+  - name: Add php 8.2 apt repository into sources list
+    ansible.builtin.apt_repository:
+      repo: ppa:ondrej/php
+      state: present
+
   - name: Install APT packages
     ansible.builtin.apt:
       name: "{{ item }}"
@@ -13,6 +18,13 @@
      - apache2
      - mysql-server
      - python3-pip
+     - php8.2
+     - libapache2-mod-php8.2
+     - php8.2-mysql
+     - php8.2-bcmath
+     - php8.2-curl
+     - php8.2-zip
+     - php8.2-dom
   
   - name: Enable UFW Firewall
     ufw:
@@ -37,4 +49,15 @@
       priv: '*.*:ALL'
       state: present
       login_unix_socket: /var/run/mysqld/mysqld.sock
-    
+  
+  - name: Generate /root/.ssh/ RSA host key
+    openssh_keypair:
+      path: /root/.ssh/id_rsa
+      owner: root
+      group: root
+
+  - name: Fix owner of the generated pub key
+    file:
+      path: /root/.ssh/id_rsa.pub
+      owner: root
+      group: root
