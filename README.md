@@ -21,6 +21,17 @@ Ansble is used to provision and do initial deployment for Staging and Production
 - Update hosts files with either correct IP addresses or domain names
 - Git URL
 
+### SECURITY NOTICE!!!!
+There are two ansible vault files that come with insecure and un-encryted data, these need to be filled out properly and encrypted before use. These are located:
+
+    ./group_vars/production/vault.yml
+    ./group_vars/staging/vault.yml
+
+These files contain sensitive information, please generate your own values and then run the following commands also using your own passwords that you'll need to save. 
+
+    ansible-vault encrypt ./group_vars/production/vault.yml
+    ansible-vault encrypt ./group_vars/staging/vault.yml
+
 Once all the above items have been updated you can deploy to either Staging or Production with the following commands:
 
 **Playbooks**
@@ -36,8 +47,8 @@ This playbook needs to be run after the provision playbook, items like the root 
 
 Staging:
 
-    ansible-playbook provision.yml -i hosts/staging
+    ansible-playbook provision.yml --ask-vault-pass -i hosts/staging
 
 Production:
 
-    ansible-playbook provision.yml -i hosts/production
+    ansible-playbook provision.yml --ask-vault-pass -i hosts/production

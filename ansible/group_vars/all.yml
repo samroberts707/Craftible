@@ -1,4 +1,3 @@
 ---
 
 project_name: craftible
-mysql_password_file: '/tmp/.mysql_password'
