@@ -1,18 +1,18 @@
-dateModified: 1700131889
+dateModified: 1730999159
 email:
   fromEmail: digitalteam@nucreative.co.uk
   fromName: Craftible
   transportType: craft\mail\transportadapters\Sendmail
 meta:
   __names__:
+    1c3115ae-fd09-4fa6-85bd-f2c315d13104: 'Public Schema' # Public Schema
     50e6cc22-2ab8-4ee4-96c0-53a13b06ee2f: Craftible # Craftible
     aa583749-a3ff-4788-a9ce-d2a1108dc734: Craftible # Craftible
-    b0fc8cbf-09d4-4c96-9a98-545d8fe42c1c: Common # Common
 system:
   edition: solo
   live: true
   name: Craftible
-  schemaVersion: 4.5.3.0
+  schemaVersion: 5.3.0.2
   timeZone: America/Los_Angeles
 users:
   allowPublicRegistration: false
