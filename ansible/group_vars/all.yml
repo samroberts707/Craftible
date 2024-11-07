@@ -2,6 +2,7 @@
 
 project_name: craftible
 project_domain: craftible.co.uk
+project_admin_email: admin@craftible.co.uk
 
 # PHP Variables
 php_max_execution_time: 60

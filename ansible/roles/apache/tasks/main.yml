@@ -1,0 +1,59 @@
+---
+
+- name: Install Apache2
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items:
+    - apache2
+
+- name: Enable UFW Firewall
+  ufw:
+    rule: allow
+    name: "{{ item }}"
+    direction: in
+    state: enabled
+  with_items:
+    - OpenSSH
+    - Apache Full
+    # TODO - Change this to "Apache Secure" once playbook is done
+
+- name: Create project directory
+  file:
+    path: "/var/www/html/{{ project_name }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0775
+
+- name: Remove default Apache Config
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/apache2/sites-available/000-default.conf
+    - /etc/apache2/sites-available/default-ssl.conf
+    - /etc/apache2/sites-enabled/000-default.conf
+    - /var/www/html/index.html
+
+- name: Add domain specific Apache Config
+  template:
+    src: virtual_host.conf.j2
+    dest: "/etc/apache2/sites-available/{{ project_domain }}.conf"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create virtual host symlink
+  file:
+    src: "/etc/apache2/sites-available/{{ project_domain }}.conf"
+    dest: "/etc/apache2/sites-enabled/{{ project_domain }}.conf"
+    owner: root
+    group: root
+    state: link
+
+- name: Restart Apache service
+  service:
+    name: apache2
+    state: restarted

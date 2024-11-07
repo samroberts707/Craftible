@@ -1,0 +1,18 @@
+<VirtualHost *:80>
+        ServerAdmin {{ project_admin_email }}
+        ServerName {{ project_domain }}
+        DocumentRoot /var/www/html/{{ project_name }}/web
+
+        <Directory /var/www/html/{{ project_name }}/web/>
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            Require all granted
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        <IfModule mod_dir.c>
+            DirectoryIndex index.php index.pl index.cgi index.html index.xhtml index.htm
+        </IfModule>
+</VirtualHost>

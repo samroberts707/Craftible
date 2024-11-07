@@ -10,20 +10,8 @@
       state: present
       update_cache: true
     with_items:
-     - apache2
      - mysql-server
      - python3-pip
-  
-  - name: Enable UFW Firewall
-    ufw:
-      rule: allow
-      name: "{{ item }}"
-      direction: in
-      state: enabled
-    with_items:
-      - OpenSSH
-      - Apache Full
-      # TODO - Change this to "Apache Secure" once playbook is done
 
   - name: Make sure pymysql is present
     pip:
@@ -50,13 +38,6 @@
       owner: root
       group: root
 
-  - name: Create project directory
-    ansible.builtin.file:
-      path: "/var/www/html/{{ project_name }}"
-      state: directory
-      owner: www-data
-      group: www-data
-      mode: 0775
-
   roles:
+    - apache
     - php
