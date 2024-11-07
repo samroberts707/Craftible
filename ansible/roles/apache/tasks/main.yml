@@ -27,6 +27,11 @@
     group: www-data
     mode: 0775
 
+- name: Disable default Apache virtualhost
+  command: >
+    a2dissite 000-default
+    removes=/etc/apache2/sites-enabled/000-default.conf
+
 - name: Remove default Apache Config
   file:
     path: "{{ item }}"
@@ -34,7 +39,6 @@
   with_items:
     - /etc/apache2/sites-available/000-default.conf
     - /etc/apache2/sites-available/default-ssl.conf
-    - /etc/apache2/sites-enabled/000-default.conf
     - /var/www/html/index.html
 
 - name: Add domain specific Apache Config
@@ -45,13 +49,10 @@
     group: root
     mode: 0644
 
-- name: Create virtual host symlink
-  file:
-    src: "/etc/apache2/sites-available/{{ project_domain }}.conf"
-    dest: "/etc/apache2/sites-enabled/{{ project_domain }}.conf"
-    owner: root
-    group: root
-    state: link
+- name: Enable CraftCMS Site
+  command: >
+    a2ensite {{ project_domain }}
+    creates=/etc/apache2/sites-enabled/{{ project_domain }}.conf
 
 - name: Enable Apache rewrite module (required for Craft CMS).
   apache2_module:
