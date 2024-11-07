@@ -21,3 +21,9 @@
     priv: '*.*:ALL'
     state: present
     login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create project database
+  community.mysql.mysql_db:
+    name: "{{ project_name }}"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock

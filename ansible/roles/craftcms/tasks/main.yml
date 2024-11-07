@@ -5,12 +5,12 @@
     name: composer
     state: present
     update_cache: true
-  
+
 - name: Composer install php packages
   community.general.composer:
     command: install
     working_dir: "/var/www/html/{{ project_name }}"
-  
+
 - name: Set correct directory ownership
   file:
     dest: "{{ item }}"
