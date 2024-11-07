@@ -1,0 +1,61 @@
+---
+
+- name: Add latest php apt repository into sources list
+  apt_repository:
+      repo: ppa:ondrej/php
+      state: present
+      update_cache: true
+
+- name: Install PHP and Packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items:
+    - php8.3
+    - libapache2-mod-php8.3
+    - php8.3-mysql
+    - php8.3-bcmath
+    - php8.3-curl
+    - php8.3-zip
+    - php8.3-dom
+    - php8.3-simplexml
+    - php8.3-mbstring
+    - php8.3-gd
+    - php8.3-intl
+    - php8.3-soap
+    - php8.3-opcache
+
+- name: Update Apache php.ini
+  template:
+    src: php.ini.j2
+    dest: /etc/php/8.3/apache2/php.ini
+    backup: yes
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Update CLI php.ini
+  template:
+    src: php.ini.j2
+    dest: /etc/php/8.3/cli/php.ini
+    backup: yes
+    owner: root
+    group: root
+    mode: 0644
+
+# Not sure if needed atm
+# - name: Disable PHP8.1 Apache Module
+#   community.general.apache2_module:
+#     state: absent
+#     name: php8.1
+
+# - name: Enable PHP8.3 Apache Module
+#   community.general.apache2_module:
+#     state: present
+#     name: php8.3
+
+- name: Restart Apache service
+  service:
+    name: httpd
+    state: restarted

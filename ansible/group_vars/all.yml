@@ -1,3 +1,11 @@
 ---
 
 project_name: craftible
+project_domain: craftible.co.uk
+
+# PHP Variables
+php_max_execution_time: 60
+php_memory_limit: 512M
+php_post_max_size: 32M
+php_upload_max_filesize: 32M
+php_date_timezone: Europe/London
