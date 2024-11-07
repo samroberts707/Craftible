@@ -11,8 +11,7 @@ This is a CraftCMS project boilerplate, designed to guide people from the start 
 
 ### DDEV
 
-DDEV will be used in Local dev as a provider for PHP and MySQL.  
-  
+DDEV will be used in Local dev as a provider for PHP and MySQL.
 
 ### Ansible
 Ansble is used to provision and do initial deployment for Staging and Production environments. A server such a boddy.works will be used for CI/CD so this is designed to only be run on a fresh server. Current OS target is Ubuntu 22.04
