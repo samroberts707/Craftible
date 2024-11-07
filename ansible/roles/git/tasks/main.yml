@@ -4,6 +4,7 @@
   ansible.builtin.apt:
     name: git
     state: present
+    update_cache: true
 
 - name: Clone Git Repo
   git:

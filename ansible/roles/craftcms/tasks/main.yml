@@ -1,0 +1,31 @@
+---
+
+- name: Install Composer
+  ansible.builtin.apt:
+    name: composer
+    state: present
+    update_cache: true
+  
+- name: Composer install php packages
+  community.general.composer:
+    command: install
+    working_dir: "/var/www/html/{{ project_name }}"
+  
+- name: Set correct directory ownership
+  file:
+    dest: "{{ item }}"
+    owner: www-data
+    group: www-data
+    recurse: true
+  with_items:
+   - /var/www/html/craftible/storage
+   - /var/www/html/craftible/config
+   - /var/www/html/craftible/web
+
+- name: Create .env
+  template:
+    src: .env.j2
+    dest: "/var/www/html/{{ project_name }}/.env"
+    owner: root
+    group: root
+    mode: 0644
