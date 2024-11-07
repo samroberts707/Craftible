@@ -29,3 +29,6 @@
     owner: root
     group: root
     mode: 0644
+
+- name: Generate application and security keys
+  command: php /var/www/html/{{ project_name }}/craft setup/keys
