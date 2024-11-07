@@ -54,9 +54,9 @@
     state: link
 
 - name: Enable Apache rewrite module (required for Craft CMS).
-    apache2_module:
-      name: rewrite
-      state: present
+  apache2_module:
+    name: rewrite
+    state: present
 
 - name: Restart Apache service
   service:
