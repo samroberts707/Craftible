@@ -1,0 +1,13 @@
+---
+
+- name: Install Git
+  ansible.builtin.apt:
+    name: git
+    state: present
+
+- name: Clone Git Repo
+  git:
+    repo: "{{ project_repo }}"
+    dest: "/var/www/html/{{ project_name }}"
+    version: "{{ project_git_branch }}"
+    accept_newhostkey: true

@@ -23,8 +23,8 @@
   file:
     path: "/var/www/html/{{ project_name }}"
     state: directory
-    owner: www-data
-    group: www-data
+    owner: root
+    group: root
     mode: 0775
 
 - name: Disable default Apache virtualhost

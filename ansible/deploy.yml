@@ -1,0 +1,7 @@
+---
+- name: Deploy project
+  hosts: all
+  remote_user: root
+
+  roles:
+    - git

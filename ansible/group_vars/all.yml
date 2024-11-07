@@ -3,6 +3,8 @@
 project_name: craftible
 project_domain: craftible.co.uk
 project_admin_email: admin@craftible.co.uk
+project_repo: git@github.com:samroberts707/Craftible.git
+project_git_branch: master
 
 # PHP Variables
 php_max_execution_time: 60
