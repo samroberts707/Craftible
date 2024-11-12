@@ -26,7 +26,7 @@
     - php8.3-soap
     - php8.3-opcache
 
-- name: Update Apache php.ini
+- name: Update FPM php.ini
   template:
     src: php.ini.j2
     dest: /etc/php/8.3/fpm/php.ini

@@ -12,3 +12,6 @@ php_memory_limit: 512M
 php_post_max_size: 32M
 php_upload_max_filesize: 32M
 php_date_timezone: Europe/London
+php_opcache_memory_limit: 256
+php_opcache_file_limit: 10000
+php_opcache_revalidate_freq: 100
