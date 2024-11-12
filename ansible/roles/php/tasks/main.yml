@@ -12,7 +12,7 @@
     state: present
     update_cache: true
   with_items:
-    - php8.3
+    - php8.3-fpm
     - libapache2-mod-php8.3
     - php8.3-mysql
     - php8.3-bcmath
@@ -29,7 +29,7 @@
 - name: Update Apache php.ini
   template:
     src: php.ini.j2
-    dest: /etc/php/8.3/apache2/php.ini
+    dest: /etc/php/8.3/fpm/php.ini
     backup: yes
     owner: root
     group: root
@@ -58,13 +58,22 @@
     - php8.0
     - php8.1
     - php8.2
-    # - php8.3
+    - php8.3
     - php8.4
+    - mpm_prefork
 
-# - name: Enable PHP8.3 Apache Module
-#   community.general.apache2_module:
-#     state: present
-#     name: php8.3
+- name: Enable PHP8.3 Event Apache Module
+  community.general.apache2_module:
+    state: present
+    name: "{{ item }}"
+  with_items:
+    - mpm_event
+    - proxy_fcgi
+    - http2
+
+- name: Enabling PHP8.3-FPM Conf
+  command: >
+    a2enconf php8.3-fpm
 
 - name: Restart Apache service
   service:
