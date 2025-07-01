@@ -3,6 +3,12 @@
   hosts: all
   remote_user: root
 
+  vars:
+    certbot_install_method: snap
+    certbot_auto_renew_user: admin@craftible.co.uk
+    certbot_auto_renew_minute: "20"
+    certbot_auto_renew_hour: "5"
+
   tasks:
   - name: Generate /root/.ssh/ RSA host key
     openssh_keypair:
@@ -20,3 +26,4 @@
     - apache
     - php
     - mysql
+    - geerlingguy.certbot
