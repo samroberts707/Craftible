@@ -1,15 +1,6 @@
 ---
 
-- name: Install Composer
-  ansible.builtin.apt:
-    name: composer
-    state: present
-    update_cache: true
-
-- name: Composer install php packages
-  community.general.composer:
-    command: install
-    working_dir: "/var/www/html/{{ project_name }}"
+# https://stackoverflow.com/questions/73724567/how-to-have-multiple-tasks-under-one-role-in-ansible
 
 - name: Set correct directory ownership
   file:
@@ -21,6 +12,7 @@
    - /var/www/html/craftible/storage
    - /var/www/html/craftible/config
    - /var/www/html/craftible/web
+  when: config_flavor == "provision"
 
 - name: Create .env
   template:
@@ -29,6 +21,8 @@
     owner: root
     group: root
     mode: 0644
+  when: config_flavor == "provision"
 
 - name: Generate application and security keys
   command: php /var/www/html/{{ project_name }}/craft setup/keys
+  when: config_flavor == "provision"
