@@ -8,11 +8,7 @@
   with_items:
     - mysql-server
     - python3-pip
-
-- name: Make sure pymysql is present
-  pip:
-    name: pymysql
-    state: present
+    - python3-pymysql
 
 - name: Create Database User "craft" for CMS
   mysql_user:

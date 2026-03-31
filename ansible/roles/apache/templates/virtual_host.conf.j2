@@ -12,7 +12,10 @@
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-        <IfModule mod_dir.c>
-            DirectoryIndex index.php index.pl index.cgi index.html index.xhtml index.htm
-        </IfModule>
+        <FilesMatch "\.php$">
+            # If you are using a Unix socket, use the following format,
+            # rewriting the path to the socket to match your php-fpm configuration
+            SetHandler "proxy:unix:/run/php/php8.5-fpm.sock|fcgi://localhost/"
+        </FilesMatch>
+
 </VirtualHost>
