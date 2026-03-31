@@ -1,4 +1,4 @@
-dateModified: 1751368945
+dateModified: 1774951012
 email:
   fromEmail: digitalteam@nucreative.co.uk
   fromName: Craftible
@@ -12,7 +12,7 @@ system:
   edition: solo
   live: true
   name: Craftible
-  schemaVersion: 5.7.0.3
+  schemaVersion: 5.9.0.8
   timeZone: America/Los_Angeles
 users:
   allowPublicRegistration: false
