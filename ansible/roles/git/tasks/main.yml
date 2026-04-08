@@ -5,6 +5,7 @@
     name: git
     state: present
     update_cache: true
+  when: config_flavor == "provision"
 
 - name: Clone Git Repo
   git:
@@ -12,3 +13,28 @@
     dest: "/var/www/html/{{ project_name }}"
     version: "{{ project_git_branch }}"
     accept_newhostkey: true
+  when: config_flavor == "provision"
+
+- name: Git Fetch
+  ansible.builtin.command: git fetch
+  args:
+    chdir: "/var/www/html/{{ project_name }}"
+  when: config_flavor == "deploy"
+
+- name: Git Reset
+  ansible.builtin.command: git reset --hard
+  args:
+    chdir: "/var/www/html/{{ project_name }}"
+  when: config_flavor == "deploy"
+
+- name: Git Checkout
+  ansible.builtin.command: "git checkout {{ project_git_branch }}"
+  args:
+    chdir: "/var/www/html/{{ project_name }}"
+  when: config_flavor == "deploy"
+
+- name: Git Pull
+  ansible.builtin.command: git pull
+  args:
+    chdir: "/var/www/html/{{ project_name }}"
+  when: config_flavor == "deploy"

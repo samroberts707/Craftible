@@ -5,7 +5,8 @@
   remote_user: root
 
   roles:
-    - git
+    - role: git
+      config_flavor: deploy
     - composer
-    - craftcms
+    - role: craftcms
       config_flavor: deploy

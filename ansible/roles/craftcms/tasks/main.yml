@@ -1,7 +1,5 @@
 ---
 
-# https://stackoverflow.com/questions/73724567/how-to-have-multiple-tasks-under-one-role-in-ansible
-
 - name: Set correct directory ownership
   file:
     dest: "{{ item }}"
@@ -12,7 +10,6 @@
    - /var/www/html/craftible/storage
    - /var/www/html/craftible/config
    - /var/www/html/craftible/web
-  when: config_flavor == "provision"
 
 - name: Create .env
   template:
@@ -24,5 +21,13 @@
   when: config_flavor == "provision"
 
 - name: Generate application and security keys
-  command: php /var/www/html/{{ project_name }}/craft setup/keys
+  ansible.builtin.command: php /var/www/html/{{ project_name }}/craft setup/keys
   when: config_flavor == "provision"
+ 
+- name: Craft Up
+  ansible.builtin.command: php /var/www/html/{{ project_name }}/craft up
+  when: config_flavor == "deploy"
+
+- name: Craft Clear Caches
+  ansible.builtin.command: php /var/www/html/{{ project_name }}/craft clear-caches/all
+  when: config_flavor == "deploy"
